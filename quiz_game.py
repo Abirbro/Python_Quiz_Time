@@ -1,28 +1,34 @@
 import time
 
-# List of questions and answers
-questions = [
-    {
-        "question": "What is the keyword used to define a function in Python?",
-        "options": ["a) def", "b) func", "c) function", "d) define"],
-        "answer": "a"
-    },
-    {
-        "question": "Which data type is used to store a sequence of characters?",
-        "options": ["a) list", "b) string", "c) tuple", "d) dictionary"],
-        "answer": "b"
-    },
-    {
-        "question": "Which of the following is NOT a valid variable name?",
-        "options": ["a) _variable", "b) variable123", "c) 123variable", "d) variable_123"],
-        "answer": "c"
-    },
-    {
-        "question": "Which operator is used to compare two values in Python?",
-        "options": ["a) =", "b) =", "c) ==", "d) !="],
-        "answer": "c"
-    }
-]
+def read_questions_from_file(file_path):
+    """
+    Reads questions and answers from a .txt file and returns them in a structured format.
+    """
+    questions = []
+    with open(file_path, 'r') as file:
+        question_data = {}
+        options = []
+        
+        for line in file:
+            line = line.strip()
+            
+            # Detect question line
+            if line.endswith('?'):
+                if question_data:
+                    question_data['options'] = options
+                    questions.append(question_data)
+                question_data = {'question': line, 'options': [], 'answer': None}
+            elif line.startswith('answer:'):
+                question_data['answer'] = line.split(':')[1].strip()
+            else:
+                options.append(line)
+        
+        # Append the last question
+        if question_data:
+            question_data['options'] = options
+            questions.append(question_data)
+    
+    return questions
 
 def ask_question(question, options, correct_answer):
     """
@@ -38,12 +44,14 @@ def ask_question(question, options, correct_answer):
     else:
         return False
     
-def start_quiz():
+def start_quiz(file_path):
     """
     Starts the quiz, asks questions, and keeps track of the score.
     """
     score = 0
     start_time = time.time()
+    
+    questions = read_questions_from_file(file_path)
     
     # Loop through each question
     for question_data in questions:
@@ -62,6 +70,7 @@ def start_quiz():
     print(f"Quiz finished! You got {score}/{len(questions)} correct!")
     print(f"Time taken: {time_taken} seconds.")
 
-# Start the game
+# Start the quiz
 if __name__ == "__main__":
-    start_quiz()    
+    # Make sure the file is in the same directory as your script or provide the correct path
+    start_quiz('questions.txt')

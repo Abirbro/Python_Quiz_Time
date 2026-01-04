@@ -1,0 +1,27 @@
+What is the keyword used to define a function in Python?
+a) def
+b) func
+c) function
+d) define
+answer: a
+
+Which data type is used to store a sequence of characters?
+a) list
+b) string
+c) tuple
+d) dictionary
+answer: b
+
+Which of the following is NOT a valid variable name?
+a) _variable
+b) variable123
+c) 123variable
+d) variable_123
+answer: c
+
+Which operator is used to compare two values in Python?
+a) =
+b) =
+c) ==
+d) !=
+answer: c
