@@ -25,3 +25,11 @@ b) =
 c) ==
 d) !=
 answer: c
+
+Which of the following is used to create a list in Python?
+
+a) []
+b) ()
+c) {}
+d) <>
+answer: a
