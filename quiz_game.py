@@ -37,3 +37,31 @@ def ask_question(question, options, correct_answer):
         return True
     else:
         return False
+    
+def start_quiz():
+    """
+    Starts the quiz, asks questions, and keeps track of the score.
+    """
+    score = 0
+    start_time = time.time()
+    
+    # Loop through each question
+    for question_data in questions:
+        question = question_data['question']
+        options = question_data['options']
+        correct_answer = question_data['answer']
+        
+        if ask_question(question, options, correct_answer):
+            print("Correct!\n")
+            score += 1
+        else:
+            print("Incorrect.\n")
+    
+    # Calculate time taken
+    time_taken = round(time.time() - start_time, 2)
+    print(f"Quiz finished! You got {score}/{len(questions)} correct!")
+    print(f"Time taken: {time_taken} seconds.")
+
+# Start the game
+if __name__ == "__main__":
+    start_quiz()    
